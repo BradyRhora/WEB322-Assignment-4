@@ -1,0 +1,57 @@
+<title>BH Article</title>
+{{> nav }}
+<main>
+    <article>
+        {{#if article}}
+        <img src="{{article.image_path}}"/>
+        <h1>{{article.headline}}</h1>
+        <h6>{{article.author}} - {{article.date}}</h6>
+        
+        <p>{{article.content}}</p>
+
+        <div id="comments">
+            {{#each comments}}
+            <div class="comment">
+                <h4>{{name}}</h4>
+                <h5>{{date}}</h5>
+                <p>{{comment}}</p>
+            </div>
+            {{/each}}
+        </div>
+        
+        <form id="article-reply" name="article-reply">
+            <label for="comment">Comment:*</label><br>
+            <textarea required autocorrect="on" name="comment" cols="40" rows="5"></textarea><br>
+            <label for="name">Name:</label><br>
+            <input name="name" type="text"/><br>
+            <label for="email">Email:*</label><br>
+            <input required name="email" type="email"/><br>
+            <input class="action-button" type="submit" value="Comment"/>
+            <p style="margin-bottom:0px">* Required</p>
+            <input type="hidden" name="articleID" value="{{article._id}}"/>
+        </form>
+        {{else}}
+        <h1>Article not found</h1>
+        {{/if}}
+    </article>
+</main>
+
+<script>
+    async function comment()
+    {
+        const fd = new FormData(form)
+        await fetch('/comment',{
+            method: 'POST',
+            body: fd
+        }).then(response => {
+            console.log(response);
+            if (response.status == 200) location.reload();
+        });
+    }
+
+    const form = document.getElementById("article-reply");
+    form.addEventListener('submit', async (e) =>{
+        e.preventDefault();
+        await comment();
+    });
+</script>

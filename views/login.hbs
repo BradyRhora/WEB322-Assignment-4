@@ -1,0 +1,14 @@
+<title>BH Login</title>
+<main>
+    <div class="center" id="form-container">
+        <h2>Login</h2>
+        <form id="form">
+            <input id="username" class="middleCol" name="username" type="username" placeholder="username"/>
+            <input id="password" class="middleCol" name="password" type="password" placeholder="Password"/>
+            <input type="submit" value="Login" class="middleCol action-button"/>
+        </form>
+        <p>Don't have an account? Register <a href="/registration">here</a>.</p>
+    </div>
+</main>
+
+{{> formscript post="'/login-user'" onsuccess="'/dashboard'"}}

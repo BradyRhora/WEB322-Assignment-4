@@ -1,0 +1,58 @@
+<title>BH Dashboard</title>
+
+<main id="dashboard">
+    <h1>Dashboard</h1>
+    <h3>Welcome, {{user.firstName}} {{user.lastName}}.</h3>
+    <p>Here you may view your account details as well as access your owned domains.</p>
+    <div id="dashboard-grid">
+        <div id="account-info">
+            <h2>Account</h2>
+            <table>
+                <tr>
+                    <td>Username:</td>
+                    <td>{{user.userName}}</td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>{{user.email}}</td>
+                </tr>
+                <tr>
+                    <td>Phone:</td>
+                    <td>{{user.phone}}</td>
+                </tr>
+                <tr>
+                    <td>Address:</td>
+                    <td>{{user.address}} {{user.addressLine2}}<br>{{user.city}}, {{user.province}} {{user.country}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="domain-manager">
+            <h2>Domain Manager</h2>
+            <p>Coming soon!</p>
+        </div>
+
+        {{#if user.isAdmin}}
+        <div id="admin-panel" class="doubleCol">
+            <h2>Admin Panel</h2>
+            <p>Give and revoke admin privledges from users: <i>(Doesn't actually work yet)</i></p>
+            <table>
+                <tr>
+                    <th>User</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Is Admin</th>
+                </tr>
+                {{#each users}}
+                <tr>
+                    <td>{{userName}}</td>
+                    <td>{{firstName}} {{lastName}}</td>
+                    <td>{{email}}</td>
+                    <td><input type="checkbox" name="isadmin" {{#if isAdmin}} checked {{/if}}</td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+        {{/if}}
+    </div>
+</main>
